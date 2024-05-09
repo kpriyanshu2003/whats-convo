@@ -2,10 +2,121 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Generate Instanat Whatsapp Link</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Great+Vibes&family=Inter:wght@300;400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="https://freeiconshop.com/wp-content/uploads/edd/link-open-flat.png"
+      type="image/x-icon"
+    />
+    <meta name="description" content="Generate Instanat Whatsapp Link" />
+    <meta name="keywords" content="Generate Instanat Whatsapp Link" />
+    <meta name="author" content="Generate Instanat Whatsapp Link" />
+    <meta property="og:title" content="Generate Instanat Whatsapp Link" />
+    <meta property="og:description" content="Generate Instanat Whatsapp Link" />
+    <meta
+      property="og:image"
+      content="https://freeiconshop.com/wp-content/uploads/edd/link-open-flat.png"
+    />
+
+    <script src="./script.js" defer></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.4/iconify-icon.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: { extend: { fontFamily: { poppins: "Poppins" } } },
+      };
+    </script>
   </head>
-  <body>
-    Hello World
+  <body class="h-screen border bg-slate-50">
+    <div class="border lg:w-[600px] p-8 mx-auto bg-white lg:mt-10">
+      <h1
+        class="font-semibold font-poppins text-slate-700 text-3xl md:text-4xl mt-4"
+      >
+        Whatsapp Conversation
+      </h1>
+      <p class="text-xs md:text-sm font-poppins text-slate-500 leading-6 mt-2">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam voluptas
+        iure asperiores nemo corrupti aut, ullam reprehenderit quod adipisci?
+      </p>
+      <form id="form" class="mt-8">
+        <div>
+          <label for="phone" class="block text-sm font-semibold text-slate-500"
+            >Phone</label
+          >
+          <div
+            class="border h-12 flex items-center rounded-md overflow-hidden mt-3"
+          >
+            <div
+              class="bg-slate-100 w-20 h-12 border-r grid place-items-center cursor-default"
+            >
+              <span
+                class="w-full appearance-none px-4 bg-transparent text-center outline-none text-slate-700 font-medium font-poppins"
+                >+91</span
+              >
+            </div>
+            <input
+              type="tel"
+              class="px-4 w-full h-full bg-transparent outline-none text-slate-700"
+              placeholder="Phone number"
+              name=""
+              id="phone"
+            />
+          </div>
+        </div>
+        <div class="mt-7">
+          <label for="file" class="block text-sm font-semibold text-slate-500"
+            >File</label
+          >
+          <div
+            class="border font-poppins text-sm h-12 flex items-center rounded-md overflow-hidden mt-3"
+          >
+            <input
+              type="file"
+              class="px-4 w-full bg-transparent outline-none text-slate-700 cursor-pointer"
+              placeholder="Phone number"
+              name=""
+              id="file"
+            />
+          </div>
+        </div>
+        <div class="mt-7">
+          <label for="" class="block text-sm font-semibold text-slate-500"
+            >Message</label
+          >
+          <div class="border rounded-md overflow-hidden mt-3">
+            <textarea
+              name=""
+              id="message"
+              class="w-full resize-none px-4 py-3 bg-transparent outline-none text-slate-700"
+              rows="4"
+              placeholder="Enter your message here"
+            ></textarea>
+          </div>
+        </div>
+        <div class="mt-7 flex items-center gap-5">
+          <button
+            type="submit"
+            class="h-14 w-full bg-indigo-500 hover:bg-indigo-600 text-white rounded-md transition-all duration-300 text-medium"
+          >
+            Send Message
+          </button>
+          <button
+            class="h-14 w-full bg-gray-200 hover:bg-gray-300 rounded-md transition-all duration-300 text-black text-medium"
+            type="reset"
+          >
+            Clear
+          </button>
+        </div>
+      </form>
+    </div>
   </body>
 </html>
