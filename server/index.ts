@@ -31,11 +31,11 @@ app.use((req: Request, res: Response) => {
   res.json({ message: "API Working Normally" });
 });
 
-// mongoose
-//   .connect(mongodb)
-//   .then(() =>
-app.listen(port, () =>
-  console.log("Server running on http://localhost:", port)
-);
-// )
-// .catch((error) => console.log(error));
+mongoose
+  .connect(mongodb)
+  .then(() =>
+    app.listen(port, () =>
+      console.log("Server running on http://localhost:", port)
+    )
+  )
+  .catch((error) => console.log(error));
