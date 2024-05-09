@@ -14,7 +14,7 @@ import webhookRouter from "./routes/webhook";
 import chatRouter from "./routes/chat";
 
 const corsConfig = {
-  origin: ["http://localhost:3000", "http://localhost:5500"],
+  origin: "*",
   credentials: true,
 };
 
@@ -23,6 +23,7 @@ app.use(compress());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/uploads", express.static("uploads"));
 
 app.use("/webhook", webhookRouter);
 app.use("/chat", chatRouter);

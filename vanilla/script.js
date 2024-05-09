@@ -3,7 +3,6 @@ const phone = document.getElementById("phone");
 const message = document.getElementById("message");
 const file = document.getElementById("file");
 
-console.log(process.env.VALUE);
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (!validate()) return;
@@ -14,7 +13,7 @@ form.addEventListener("submit", async (e) => {
 
 async function submitForm() {
   const formData = new FormData();
-  formData.append("phone", phone.value);
+  formData.append("phone", "91" + phone.value);
   formData.append("message", message.value);
   formData.append("file", file.files[0]);
   const response = await axios("http://localhost:3300/chat", {
