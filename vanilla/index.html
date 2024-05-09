@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Generate Instanat Whatsapp Link</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="./style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,21 +14,6 @@
       href="https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Great+Vibes&family=Inter:wght@300;400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="shortcut icon"
-      href="https://freeiconshop.com/wp-content/uploads/edd/link-open-flat.png"
-      type="image/x-icon"
-    />
-    <meta name="description" content="Generate Instanat Whatsapp Link" />
-    <meta name="keywords" content="Generate Instanat Whatsapp Link" />
-    <meta name="author" content="Generate Instanat Whatsapp Link" />
-    <meta property="og:title" content="Generate Instanat Whatsapp Link" />
-    <meta property="og:description" content="Generate Instanat Whatsapp Link" />
-    <meta
-      property="og:image"
-      content="https://freeiconshop.com/wp-content/uploads/edd/link-open-flat.png"
-    />
-
     <script src="./script.js" defer></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.4/iconify-icon.min.js"></script>
     <script>
@@ -67,6 +53,7 @@
               type="tel"
               class="px-4 w-full h-full bg-transparent outline-none text-slate-700"
               placeholder="Phone number"
+              value="1234567890"
               name=""
               id="phone"
             />
@@ -98,6 +85,7 @@
               id="message"
               class="w-full resize-none px-4 py-3 bg-transparent outline-none text-slate-700"
               rows="4"
+              value="Hello, I want to know more about your product."
               placeholder="Enter your message here"
             ></textarea>
           </div>
