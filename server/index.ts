@@ -17,7 +17,8 @@ import chatRouter from "./routes/chat";
 const corsConfig = {
   origin: [
     "http://localhost:3000",
-    "https://kpriyanshu2003.github.io/whats-convo/",
+    "https://kpriyanshu2003.github.io/whats-convo",
+    "https://kpriyanshu2003.github.io",
   ],
   credentials: true,
 };

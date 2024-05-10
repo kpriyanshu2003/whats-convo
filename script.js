@@ -16,7 +16,7 @@ async function submitForm() {
   formData.append("phone", "91" + phone.value);
   formData.append("message", message.value);
   formData.append("file", file.files[0]);
-  const response = await axios("http://localhost:3300/chat", {
+  const response = await axios("https://whats-convo.onrender.com/chat", {
     method: "post",
     data: formData,
   });
