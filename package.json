@@ -1,0 +1,11 @@
+{
+  "name": "whats-convo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kpriyanshu2003/whats-convo.git",
+  "author": "Kumar Priyanshu <az.priyanshu.rockstar@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.8"
+  }
+}
