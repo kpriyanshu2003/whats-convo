@@ -26,14 +26,7 @@ router.post("/", upload.single("file"), async (req: Request, res: Response) => {
     const { phone, message } = req.body;
     const file = req.file;
 
-    let fileType:
-      | "document"
-      | "image"
-      | "application"
-      | "audio"
-      | "video"
-      | string
-      | undefined = file?.mimetype.split("/")[0];
+    let fileType = file?.mimetype.split("/")[0];
     if (fileType === "application") fileType = "document";
     const fileUrl = URL + "/" + file?.path;
 
@@ -42,15 +35,6 @@ router.post("/", upload.single("file"), async (req: Request, res: Response) => {
       recipient_type: "individual",
       to: phone,
       type: fileType || "text",
-    };
-    let responseBody = {
-      senderNo: phone,
-      type: fileType || "text",
-      text: fileType === "text" ? message : undefined,
-      document: undefined,
-      image: undefined,
-      video: undefined,
-      audio: undefined,
     };
 
     switch (fileType) {
@@ -61,7 +45,6 @@ router.post("/", upload.single("file"), async (req: Request, res: Response) => {
         break;
       case "audio":
         requestBody.audio = { link: fileUrl };
-
         break;
       case "text":
         requestBody.text = { body: message };

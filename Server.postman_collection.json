@@ -1,0 +1,303 @@
+{
+	"info": {
+		"_postman_id": "72cecfc4-de68-4bf6-b902-a6779e42ab12",
+		"name": "Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29585525"
+	},
+	"item": [
+		{
+			"name": "Create Chat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "phone",
+							"value": "1234567890",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Lenovo/Pictures/Screenshots/Screenshot 2024-04-24 212942.png"
+						},
+						{
+							"key": "message",
+							"value": "Hello World",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3300/chat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3300",
+					"path": [
+						"chat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Image Message by URL",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"messaging_product\": \"whatsapp\",\n    \"recipient_type\": \"individual\",\n    \"to\": \"{{Recipient-Phone-Number}}\",\n    \"type\": \"image\",\n    \"image\": {\n        \"caption\": \"Hi\",\n        \"link\": \"https://right-keen-antelope.ngrok-free.app/uploads/image.png\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://graph.facebook.com/{{Version}}/{{Phone-Number-ID}}/messages",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"facebook",
+						"com"
+					],
+					"path": [
+						"{{Version}}",
+						"{{Phone-Number-ID}}",
+						"messages"
+					]
+				},
+				"description": "To send a media message, make a **POST** call to **`/{{Phone-Number-ID}}/messages`** and attach a message object with type = `image`. Then, be sure to include the link to the image.\n\nSend an audio message to your customers using a link to an image file.\n\nFor more information about the `Media Object` structure, see [Media Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#media-object)."
+			},
+			"response": []
+		},
+		{
+			"name": "Send Text Message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"messaging_product\": \"whatsapp\",    \n    \"recipient_type\": \"individual\",\n    \"to\": \"{{Recipient-Phone-Number}}\",\n    \"type\": \"text\",\n    \"text\": {\n        \"body\": \"text-message-content\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://graph.facebook.com/{{Version}}/{{Phone-Number-ID}}/messages",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"facebook",
+						"com"
+					],
+					"path": [
+						"{{Version}}",
+						"{{Phone-Number-ID}}",
+						"messages"
+					]
+				},
+				"description": "To send a text message, make a **POST** call to **`/{{{Phone-Number-ID}}/messages`** and attach a message object with `type = \"text\"`. Then, add a `text object`.\n\nFor more information about the `Text Object` structure, see [Text object](#fa59d67b-dc6f-446a-a0fd-f97537afbd2e).\n\n## Response\n\nA successful response includes an object with an identifier prefixed with **`wamid`**. Use the ID listed after **`wamid`** to track your message status."
+			},
+			"response": []
+		},
+		{
+			"name": "Send Audio Message by URL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"messaging_product\": \"whatsapp\",\n    \"recipient_type\": \"individual\",\n    \"to\": \"{{Recipient-Phone-Number}}\",\n    \"type\": \"audio\",\n    \"audio\": {\n        \"link\": \"https://right-keen-antelope.ngrok-free.app/uploads/audio.m4a\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://graph.facebook.com/{{Version}}/{{Phone-Number-ID}}/messages",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"facebook",
+						"com"
+					],
+					"path": [
+						"{{Version}}",
+						"{{Phone-Number-ID}}",
+						"messages"
+					]
+				},
+				"description": "To send a media message, make a **POST** call to **`/{{Phone-Number-ID}}/messages`** and attach a message object with type = `audio`. Be sure to include the link to the audio.\n\nFor more information about the `Media Object` structure, see [Media Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#media-object).\n\nSend an audio message to your customers using link from media endpoint.\n\n## Response\n\nA successful response includes an object with an identifier prefixed with **`wamid`**. Use the ID listed after **`wamid`** to track your message status."
+			},
+			"response": []
+		},
+		{
+			"name": "Send Document Message by URL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"messaging_product\": \"whatsapp\",\n    \"recipient_type\": \"individual\",\n    \"to\": \"{{Recipient-Phone-Number}}\",\n    \"type\": \"document\",\n    \"document\": {\n        \"link\": \"https://right-keen-antelope.ngrok-free.app/uploads/doc.pdf\",\n        \"caption\": \"HEHE BOI\",\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://graph.facebook.com/{{Version}}/{{Phone-Number-ID}}/messages",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"facebook",
+						"com"
+					],
+					"path": [
+						"{{Version}}",
+						"{{Phone-Number-ID}}",
+						"messages"
+					]
+				},
+				"description": "To send a media message, make a **POST** call to **`/{{Phone-Number-ID}}/messages`** and attach a message object with type = `document`. Then, include the link to the document.\n\nFor more information about the `Media Object` structure, see [Media Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#media-object).\n\nSend a document message to your customers using link.\n\n## Response\n\nA successful response includes an object with an identifier prefixed with **`wamid`**. Use the ID listed after **`wamid`** to track your message status."
+			},
+			"response": []
+		},
+		{
+			"name": "Send Video Message by URL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"messaging_product\": \"whatsapp\",\n    \"recipient_type\": \"individual\",\n    \"to\": \"{{Recipient-Phone-Number}}\",\n    \"type\": \"video\",\n    \"video\": {\n        \"link\":  \"https://right-keen-antelope.ngrok-free.app/uploads/video.mp4\",\n        \"caption\": \"<VIDEO_CAPTION_TEXT>\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://graph.facebook.com/{{Version}}/{{Phone-Number-ID}}/messages",
+					"protocol": "https",
+					"host": [
+						"graph",
+						"facebook",
+						"com"
+					],
+					"path": [
+						"{{Version}}",
+						"{{Phone-Number-ID}}",
+						"messages"
+					]
+				},
+				"description": "To send a media message, make a **POST** call to **`/{{Phone-Number-ID}}/messages`** and attach a message object with type = `video`. Then, add a link to the video.\n\nFor more information about the `Media Object` structure, see [Media Object](https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages#media-object).\n\nSend a video message to your customers using a link.\n\n## Response\n\nA successful response includes an object with an identifier prefixed with **`wamid`**. Use the ID listed after **`wamid`** to track your message status."
+			},
+			"response": []
+		},
+		{
+			"name": "Send Data to Webhook",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3300/webhook",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3300",
+					"path": [
+						"webhook"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Webhook",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3300/webhook",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3300",
+					"path": [
+						"webhook"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "EAAGCIy4szIYBO5V3rDDaryZAXlZBjMSNJFOuxKiauPwkY65fFlp81ZBO2oZB2X4gl9cmXgUyAlM0k73NcYvJ9RXZBefinnlh66Pm0WykRVHZAm5KlGvEINFkIdm9CFYO9HD2d9uZAU4JdSi8qtubT8bT42GtZAeVBf14avcJH7prpSjyqUblJfRovcPVzfjY7FFMK89RsagKrQNvIEh7QAvgSAiGFfOUSPmetZCEZD",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
