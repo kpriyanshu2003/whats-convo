@@ -4,12 +4,13 @@ const messageSchema = new mongoose.Schema(
   {
     senderName: { type: String, default: "" },
     senderNo: { type: String, default: "" },
-    from: { type: String, default: "" },
     wa_id: { type: String, default: "" },
     timestamp: { type: String, default: "" },
     type: { type: String, default: "" }, // ['image', 'text', 'document', 'audio', 'video', 'unsupported', 'utility']
     text: { type: String },
+    status: { type: String },
     document: {
+      caption: { type: String },
       filename: { type: String },
       mime_type: { type: String },
       sha256: { type: String },
@@ -22,6 +23,7 @@ const messageSchema = new mongoose.Schema(
       id: { type: String },
     },
     video: {
+      caption: { type: String },
       mime_type: { type: String },
       sha256: { type: String },
       id: { type: String },
@@ -32,7 +34,7 @@ const messageSchema = new mongoose.Schema(
       id: { type: String },
       voice: { type: Boolean },
     },
-    errors: {
+    errorMsg: {
       code: { type: Number },
       title: { type: String },
       message: { type: String },

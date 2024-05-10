@@ -1,6 +1,9 @@
 import MessageModel from "../models/message";
 
+// Sent using Frontend
 export const sentMessage = async{ }
 
-
-export const receivedMessage = async{ }
+// Received using Webhook ( Sent by User )
+export const receivedMessage = async{ 
+    
+}

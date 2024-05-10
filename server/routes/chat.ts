@@ -5,6 +5,9 @@ import multer from "multer";
 import fs from "fs";
 import dotenv from "dotenv";
 import { WhatsAppRequest } from "../@types/request";
+import MessageModel from "../models/message";
+import { WhatsappResponse } from "../@types/response";
+import { WhatsappWebHook } from "../@types/message";
 
 dotenv.config();
 const TOKEN = process.env.WATOKEN || "";
@@ -26,7 +29,14 @@ router.post("/", upload.single("file"), async (req: Request, res: Response) => {
     const { phone, message } = req.body;
     const file = req.file;
 
-    let fileType = file?.mimetype.split("/")[0];
+    let fileType:
+      | "document"
+      | "image"
+      | "application"
+      | "audio"
+      | "video"
+      | string
+      | undefined = file?.mimetype.split("/")[0];
     if (fileType === "application") fileType = "document";
     const fileUrl = URL + "/" + file?.path;
 
@@ -35,6 +45,15 @@ router.post("/", upload.single("file"), async (req: Request, res: Response) => {
       recipient_type: "individual",
       to: phone,
       type: fileType || "text",
+    };
+    let responseBody = {
+      senderNo: phone,
+      type: fileType || "text",
+      text: fileType === "text" ? message : undefined,
+      document: undefined,
+      image: undefined,
+      video: undefined,
+      audio: undefined,
     };
 
     switch (fileType) {
@@ -45,6 +64,7 @@ router.post("/", upload.single("file"), async (req: Request, res: Response) => {
         break;
       case "audio":
         requestBody.audio = { link: fileUrl };
+
         break;
       case "text":
         requestBody.text = { body: message };
@@ -52,7 +72,6 @@ router.post("/", upload.single("file"), async (req: Request, res: Response) => {
       default:
         requestBody.text = { body: message };
     }
-
     const response = await axios(
       `https://graph.facebook.com/${VERSION}/${PHONE_ID}/messages`,
       {
@@ -65,6 +84,55 @@ router.post("/", upload.single("file"), async (req: Request, res: Response) => {
       }
     );
 
+    const messageDB = new MessageModel({
+      wa_id: response.data.messages?.[0].id,
+      senderNo: phone,
+      type: fileType || "text",
+      text: fileType === "text" ? message : undefined,
+      document:
+        fileType === "document"
+          ? {
+              caption: message,
+              filename: file?.filename,
+              mime_type: file?.mimetype,
+            }
+          : undefined,
+      image:
+        fileType === "image"
+          ? {
+              caption: message,
+              filename: file?.filename,
+              mime_type: file?.mimetype,
+            }
+          : undefined,
+      video:
+        fileType === "video"
+          ? {
+              caption: message,
+              filename: file?.filename,
+              mime_type: file?.mimetype,
+            }
+          : undefined,
+      audio:
+        fileType === "audio"
+          ? {
+              filename: file?.filename,
+              mime_type: file?.mimetype,
+            }
+          : undefined,
+    });
+
+    const savedMessage = await messageDB.save();
+
+    console.log({
+      success: true,
+      phone,
+      message,
+      file,
+      requestBody,
+      data: JSON.stringify(await response.data, null, 2),
+      savedMessage,
+    });
     res.send({
       success: true,
       phone,
@@ -72,6 +140,7 @@ router.post("/", upload.single("file"), async (req: Request, res: Response) => {
       file,
       requestBody,
       data: await response.data,
+      savedMessage,
     });
   } catch (error) {
     console.log(error);

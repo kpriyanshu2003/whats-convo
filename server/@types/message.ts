@@ -33,18 +33,20 @@ export interface WhatsappWebHook {
                   | "unsupported";
                 text?: { body: string };
                 document?: {
+                  caption?: string;
                   filename: string;
                   mime_type: string;
                   sha256: string;
                   id: string;
                 };
                 image?: {
-                  caption: string;
+                  caption?: string;
                   mime_type: string;
                   sha256: string;
                   id: string;
                 };
                 video?: {
+                  caption?: string;
                   mime_type: string;
                   sha256: string;
                   id: string;
@@ -70,7 +72,7 @@ export interface WhatsappWebHook {
             statuses?: [
               {
                 id: string;
-                status: string; // read
+                status: string; // read, send, delivered
                 timestamp: string;
                 recipient_id: string; // jisko message bheja
                 conversationn: {
