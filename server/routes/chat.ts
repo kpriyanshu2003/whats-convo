@@ -2,12 +2,9 @@ import axios from "axios";
 import express, { Request, Response } from "express";
 const router = express.Router();
 import multer from "multer";
-import fs from "fs";
 import dotenv from "dotenv";
 import { WhatsAppRequest } from "../@types/request";
 import MessageModel from "../models/message";
-import { WhatsappResponse } from "../@types/response";
-import { WhatsappWebHook } from "../@types/message";
 
 dotenv.config();
 const TOKEN = process.env.WATOKEN || "";
@@ -144,6 +141,16 @@ router.post("/", upload.single("file"), async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+});
+
+router.get("/", async (req: Request, res: Response) => {
+  try {
+    const message = await MessageModel.find();
+    res.render("messages", { message });
+  } catch (e) {
+    console.log(e);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 });

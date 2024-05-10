@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import path from "path";
 import compress from "compression";
 
 dotenv.config();
@@ -14,7 +15,10 @@ import webhookRouter from "./routes/webhook";
 import chatRouter from "./routes/chat";
 
 const corsConfig = {
-  origin: "*",
+  origin: [
+    "http://localhost:3000",
+    "https://kpriyanshu2003.github.io/whats-convo/",
+  ],
   credentials: true,
 };
 
@@ -24,6 +28,8 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static("uploads"));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 app.use("/webhook", webhookRouter);
 app.use("/chat", chatRouter);

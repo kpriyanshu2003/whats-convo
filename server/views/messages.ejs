@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Faculty List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      ol {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+
+      p {
+        color: #333;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Faculty List:</h1>
+
+      <ol>
+        <% for (let msg of message) { %>
+        <li>
+          <p>_id: <%= msg._id %></p>
+          <p>senderName: <%= msg.senderName %></p>
+          <p>senderNo: <%= msg.senderNo %></p>
+          <p>Type: <%= msg.type %></p>
+          <p>Timestamp: <%= msg.timestamp %></p>
+          <% if (msg.text) { %>
+          <p>Text: <%= msg.text %></p>
+          <% } %> <% if (msg.document) { %>
+          <p>Document:</p>
+          <ul>
+            <li>Caption: <%= msg.document.caption %></li>
+            <li>Filename: <%= msg.document.filename %></li>
+            <li>Mime Type: <%= msg.document.mime_type %></li>
+            <li>SHA256: <%= msg.document.sha256 %></li>
+            <li>ID: <%= msg.document.id %></li>
+          </ul>
+          <% } %> <% if (msg.image) { %>
+          <p>Image:</p>
+          <ul>
+            <li>Caption: <%= msg.image.caption %></li>
+            <li>Mime Type: <%= msg.image.mime_type %></li>
+            <li>SHA256: <%= msg.image.sha256 %></li>
+            <li>ID: <%= msg.image.id %></li>
+          </ul>
+          <% } %> <% if (msg.video) { %>
+          <p>Video:</p>
+          <ul>
+            <li>Caption: <%= msg.video.caption %></li>
+            <li>Mime Type: <%= msg.video.mime_type %></li>
+            <li>SHA256: <%= msg.video.sha256 %></li>
+            <li>ID: <%= msg.video.id %></li>
+          </ul>
+          <% } %> <% if (msg.audio) { %>
+          <p>Audio:</p>
+          <ul>
+            <li>Mime Type: <%= msg.audio.mime_type %></li>
+            <li>SHA256: <%= msg.audio.sha256 %></li>
+            <li>ID: <%= msg.audio.id %></li>
+            <li>Voice: <%= msg.audio.voice %></li>
+          </ul>
+          <% } %> <% if (msg.errorMsg) { %>
+          <p>Error Message:</p>
+          <ul>
+            <li>Code: <%= msg.errorMsg.code %></li>
+            <li>Title: <%= msg.errorMsg.title %></li>
+            <li>Message: <%= msg.errorMsg.message %></li>
+            <li>Error Data: <%= msg.errorMsg.error_data %></li>
+          </ul>
+          <% } %> <% if (msg.statuses) { %>
+          <p>Statuses:</p>
+          <ul>
+            <li>ID: <%= msg.statuses.id %></li>
+            <li>Status: <%= msg.statuses.status %></li>
+            <li>Recipient ID: <%= msg.statuses.recipient_id %></li>
+          </ul>
+          <% } %>
+        </li>
+        <% } %>
+      </ol>
+    </div>
+  </body>
+</html>
